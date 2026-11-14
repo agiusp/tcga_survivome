@@ -10,6 +10,7 @@ features. It is built to run as a static site on GitHub Pages.
 - [x] Cohort builder UI (DuckDB-WASM): filters on any variable, live counts
 - [x] Kaplan–Meier, log-rank, numbers at risk, medians and landmark survival (JS)
 - [x] Cox models with Efron ties and optional stratification by cancer type (JS)
+- [x] Per-cancer-type results table (log-rank p, hazard ratio, FDR-adjusted p) for multi-type cohorts
 - [ ] Proportional-hazards checks (possibly webR + `survival`)
 - [ ] GitHub repository, Actions build + Pages deploy
 

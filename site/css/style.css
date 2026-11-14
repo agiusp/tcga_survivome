@@ -94,7 +94,7 @@ button.linklike:hover { text-decoration: underline; }
 /* Tables */
 .table-scroll { overflow-x: auto; margin-top: 8px; }
 table.data { border-collapse: collapse; width: 100%; font-size: 13px; }
-table.data th, table.data td { padding: 5px 10px 5px 0; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--grid); font-variant-numeric: tabular-nums; }
+table.data th, table.data td { padding: 5px 8px 5px 0; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--grid); font-variant-numeric: tabular-nums; }
 table.data th { color: var(--ink-2); font-weight: 500; font-size: 12px; }
 table.data th:first-child, table.data td:first-child { text-align: left; white-space: normal; min-width: 170px; }
 table.data td.forest { padding: 0 10px 0 0; width: 220px; }
@@ -107,3 +107,13 @@ td .key { margin-right: 6px; vertical-align: middle; }
 .chip button { border: 0; background: none; color: var(--muted); padding: 0 6px; font-size: 15px; }
 .about ul { margin: 0 0 8px; padding-left: 18px; color: var(--ink-2); display: grid; gap: 4px; }
 a { color: var(--accent); }
+
+/* Per-cancer-type breakdown */
+details { margin-top: 14px; border-top: 1px solid var(--grid); padding-top: 10px; }
+summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+details[open] summary { margin-bottom: 6px; }
+table.sortable th { cursor: pointer; user-select: none; white-space: normal; vertical-align: bottom; min-width: 56px; }
+table.sortable th:first-child, table.sortable td:first-child { min-width: 90px; }
+table.sortable th:hover { color: var(--ink); }
+table.data td button.linklike { padding: 0; font-weight: 600; }
+table.data tr.sig td { background: var(--wash); }

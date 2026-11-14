@@ -152,7 +152,33 @@ Two places use a Cox model:
 - A warning appears if the model did not converge.
 - The model is not fitted with fewer events than terms + 1, or with more than 40 terms.
 
-## 6. What is not done
+## 6. Results for each cancer type
+
+When the cohort contains more than one cancer type, a table under the plot repeats the
+analysis inside each cancer type. It is meant for spotting cancer types worth a closer
+look; clicking one restricts the cohort to it.
+
+- **Groups** are the ones already defined for the plot. Numeric cut points therefore come
+  from the whole cohort unless "Compute cut points within each cancer type" is on, in which
+  case each type is split at its own values.
+- **Per-type statistics**: patients, events, and for each group its size and Kaplan–Meier
+  median (shown for up to 4 groups). With no comparison selected, the table instead gives
+  the median with its 95% interval and 1-, 3- and 5-year survival.
+- **Log-rank p** is the unstratified test within that cancer type, over the groups that have
+  patients there. It is blank when only one group is present or there are no events.
+- **Hazard ratio** (two groups only) is from an unadjusted Cox model, second group relative
+  to the first. It is blank when it can't be estimated.
+- **Adjusted p** is the Benjamini–Hochberg false-discovery-rate adjustment across the cancer
+  types that were tested. Rows with adjusted p below 0.05 are shaded. It corrects only for
+  the number of cancer types in this one table, not for other variables, cut points or
+  endpoints you have tried.
+- The "Stratify tests by cancer type" and "Censor follow-up at" options: stratification has
+  no effect inside a single cancer type; censoring applies as in the main analysis.
+
+Small cancer types have few events (see the README), so a large p-value there often means
+too little data, not no effect.
+
+## 7. What is not done
 
 Keep these in mind when reading results:
 

@@ -426,7 +426,121 @@ async function update() {
   });
   $('km-table').replaceChildren(h('thead', {}, h('tr', {}, head.map((t) => h('th', {}, t)))), h('tbody', {}, body));
 
+  renderByType(A, g, labels, nTypes);
   renderCox(A, g, labels, strata);
+}
+
+// ---------- results for each cancer type ----------
+
+let byType = { cols: [], rows: [], sort: null };
+
+/** Benjamini–Hochberg adjusted p-values (NaN entries are ignored). */
+function adjustBH(ps) {
+  const idx = ps.map((p, i) => i).filter((i) => !Number.isNaN(ps[i])).sort((a, b) => ps[b] - ps[a]);
+  const out = ps.map(() => NaN), m = idx.length;
+  let min = 1;
+  idx.forEach((i, rank) => { min = Math.min(min, (ps[i] * m) / (m - rank)); out[i] = min; });
+  return out;
+}
+
+/** Repeats the current analysis inside each cancer type of the cohort. */
+function renderByType(A, g, labels, nTypes) {
+  const box = $('bytype');
+  box.hidden = nTypes < 2;
+  if (nTypes < 2) return;
+  const k = labels.length, yr = state.unit === 'years' ? 1 : 12;
+  const members = new Map();
+  A.forEach((r, i) => { if (!members.has(r.ct)) members.set(r.ct, []); members.get(r.ct).push(i); });
+
+  const rows = [...members].map(([ct, idx]) => {
+    const time = idx.map((i) => A[i].t), event = idx.map((i) => A[i].e), grp = idx.map((i) => g[i]);
+    const row = { ct, n: idx.length, events: event.reduce((s, e) => s + e, 0), p: NaN, hr: NaN, lo: NaN, hi: NaN };
+    const fits = labels.map((_, j) => {
+      const sel = grp.map((v, i) => (v === j ? i : -1)).filter((i) => i >= 0);
+      return kmFit(sel.map((i) => time[i]), sel.map((i) => event[i]));
+    });
+    row.sizes = fits.map((f) => f.n);
+    row.medians = fits.map((f) => (f.n ? kmMedian(f) : { median: NaN, lower: NaN, upper: NaN }));
+    row.landmarks = [1, 3, 5].map((y) => survAt(fits[0], y * yr));
+    // test only the groups that have patients in this cancer type
+    const present = labels.map((_, j) => j).filter((j) => fits[j].n > 0);
+    if (present.length > 1 && row.events > 0) {
+      const code = new Map(present.map((j, i) => [j, i]));
+      row.p = logRank(time, event, grp.map((v) => code.get(v)), present.length).p;
+      if (k === 2) {
+        const fit = coxFit(time, event, [grp.map((v) => (v === 1 ? 1 : 0))]);
+        if (fit.converged && fit.se[0] < 10) { row.hr = fit.hr[0]; row.lo = fit.lower[0]; row.hi = fit.upper[0]; }
+      }
+    }
+    return row;
+  });
+  const q = adjustBH(rows.map((r) => r.p));
+  rows.forEach((r, i) => { r.q = q[i]; });
+
+  const medianText = (m) => (Number.isNaN(m.median) ? 'not reached' : fmtNum(m.median));
+  const cols = [
+    { title: 'Cancer type', val: (r) => r.ct, text: (r) => r.ct },
+    { title: 'Patients', val: (r) => r.n, text: (r) => r.n.toLocaleString('en') },
+    { title: 'Events', val: (r) => r.events, text: (r) => r.events.toLocaleString('en') },
+  ];
+  if (k === 1) {
+    cols.push({ title: `Median, ${state.unit} (95% CI)`, val: (r) => r.medians[0].median,
+      text: (r) => { const m = r.medians[0]; return Number.isNaN(m.median) ? 'not reached' : `${fmtNum(m.median)} (${fmtNum(m.lower)} to ${Number.isNaN(m.upper) ? 'not reached' : fmtNum(m.upper)})`; } });
+    ['1-year', '3-year', '5-year'].forEach((t, j) => cols.push({ title: t, val: (r) => r.landmarks[j], text: (r) => pct(r.landmarks[j]) }));
+  } else {
+    if (k <= 4) labels.forEach((l, j) => cols.push({ title: `${l}: patients; median ${state.unit}`, val: (r) => r.medians[j].median,
+      text: (r) => (r.sizes[j] ? `${r.sizes[j].toLocaleString('en')}; ${medianText(r.medians[j])}` : '–') }));
+    if (k === 2) cols.push({ title: 'Hazard ratio (95% CI)', val: (r) => r.hr,
+      text: (r) => (Number.isNaN(r.hr) ? '–' : `${fmtHR(r.hr)} (${fmtHR(r.lo)} to ${fmtHR(r.hi)})`) });
+    cols.push({ title: 'Log-rank p', val: (r) => r.p, text: (r) => fmtP(r.p), raw: true });
+    cols.push({ title: 'Adjusted p', val: (r) => r.q, text: (r) => fmtP(r.q), raw: true });
+  }
+  const pCol = cols.findIndex((c) => c.title === 'Log-rank p');
+  byType = { cols, rows, sort: pCol >= 0 ? { col: pCol, dir: 1 } : { col: 0, dir: 1 } };
+
+  $('bytype-summary').textContent = `Results for each of the ${nTypes} cancer types`;
+  $('bytype-hint').textContent = k === 1
+    ? 'The same endpoint within each cancer type. Click a column heading to sort, or a cancer type to restrict the cohort to it.'
+    : 'The same comparison repeated within each cancer type, using the groups defined above' +
+      (state.groupBy && isNum(state.groupBy) && !state.withinType && state.split !== 'custom' ? ' (cut points come from the whole cohort; tick “Compute cut points within each cancer type” to split each type at its own values)' : '') +
+      '. Adjusted p corrects for testing several cancer types (Benjamini–Hochberg); shaded rows have adjusted p below 0.05. ' +
+      (k === 2 ? `Hazard ratios are ${labels[1]} relative to ${labels[0]}. ` : '') +
+      'Click a column heading to sort, or a cancer type to restrict the cohort to it.';
+  drawByType();
+}
+
+function drawByType() {
+  const { cols, rows, sort } = byType;
+  const c = cols[sort.col];
+  const sorted = rows.slice().sort((a, b) => {
+    const x = c.val(a), y = c.val(b);
+    if (typeof x === 'string') return sort.dir * collator.compare(x, y);
+    if (Number.isNaN(x) || Number.isNaN(y)) return Number.isNaN(x) - Number.isNaN(y); // missing last
+    return sort.dir * (x - y);
+  });
+  $('bytype-table').replaceChildren(
+    h('thead', {}, h('tr', {}, cols.map((col, i) => h('th', {
+      'aria-sort': i === sort.col ? (sort.dir > 0 ? 'ascending' : 'descending') : null,
+      onclick: () => { byType.sort = { col: i, dir: i === sort.col ? -sort.dir : 1 }; drawByType(); },
+    }, col.title + (i === sort.col ? (sort.dir > 0 ? ' ▲' : ' ▼') : ''))))),
+    h('tbody', {}, sorted.map((r) => h('tr', { class: r.q < 0.05 ? 'sig' : null }, cols.map((col, i) => h('td', {},
+      i === 0 ? h('button', { type: 'button', class: 'linklike', title: `Restrict the cohort to ${r.ct}`, onclick: () => focusType(r.ct) }, r.ct) : col.text(r)))))));
+}
+
+async function focusType(ct) {
+  let f = state.filters.find((x) => x.col === 'cancer_type');
+  if (!f) { f = { col: 'cancer_type', values: [] }; state.filters.unshift(f); }
+  f.values = [ct];
+  await renderFilters();
+  await update();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function downloadByType() {
+  const { cols, rows } = byType;
+  const cell = (v) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
+  download('tcga_survivome_by_cancer_type.csv', 'text/csv',
+    [cols.map((c) => cell(c.title)).join(','), ...rows.map((r) => cols.map((c) => (c.raw ? (Number.isNaN(c.val(r)) ? '' : String(c.val(r))) : cell(c.text(r)))).join(','))].join('\n'));
 }
 
 // ---------- Cox model ----------
@@ -613,6 +727,7 @@ async function main() {
   });
   $('btn-csv').addEventListener('click', downloadCsv);
   $('btn-svg').addEventListener('click', downloadSvg);
+  $('btn-bytype-csv').addEventListener('click', downloadByType);
   $('btn-link').addEventListener('click', async (ev) => {
     try { await navigator.clipboard.writeText(location.href); ev.target.textContent = 'Link copied'; }
     catch { ev.target.textContent = 'Copy the address bar'; }
