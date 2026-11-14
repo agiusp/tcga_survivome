@@ -1,0 +1,1186 @@
+{
+  "built": "2026-11-12",
+  "n_patients": 11160,
+  "columns": [
+    {
+      "column": "patient_id",
+      "group": "id",
+      "label": "Patient",
+      "type": "id",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 1
+    },
+    {
+      "column": "sample_id",
+      "group": "id",
+      "label": "Tumor sample",
+      "type": "id",
+      "unit": null,
+      "source": "cBioPortal PanCancer Atlas 2018",
+      "description": "Canonical tumor sample used for sample-level features (primary > blood > metastatic > recurrent).",
+      "coverage": 0.974
+    },
+    {
+      "column": "cancer_type",
+      "group": "clinical",
+      "label": "Cancer type",
+      "type": "categorical",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 1
+    },
+    {
+      "column": "age",
+      "group": "clinical",
+      "label": "Age at diagnosis",
+      "type": "numeric",
+      "unit": "years",
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.995
+    },
+    {
+      "column": "age_group",
+      "group": "clinical",
+      "label": "Age group",
+      "type": "categorical",
+      "unit": null,
+      "source": "derived",
+      "description": null,
+      "coverage": 0.995
+    },
+    {
+      "column": "sex",
+      "group": "clinical",
+      "label": "Sex",
+      "type": "categorical",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 1
+    },
+    {
+      "column": "race",
+      "group": "clinical",
+      "label": "Race (self-reported)",
+      "type": "categorical",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.881
+    },
+    {
+      "column": "ethnicity",
+      "group": "clinical",
+      "label": "Ethnicity",
+      "type": "categorical",
+      "unit": null,
+      "source": "cBioPortal PanCancer Atlas 2018",
+      "description": null,
+      "coverage": 0.692
+    },
+    {
+      "column": "genetic_ancestry",
+      "group": "clinical",
+      "label": "Genetic ancestry",
+      "type": "categorical",
+      "unit": null,
+      "source": "cBioPortal PanCancer Atlas 2018",
+      "description": null,
+      "coverage": 0.902
+    },
+    {
+      "column": "stage",
+      "group": "clinical",
+      "label": "Stage (I-IV)",
+      "type": "categorical",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": "AJCC pathologic stage collapsed to I-IV; clinical stage used when pathologic is missing.",
+      "coverage": 0.767
+    },
+    {
+      "column": "stage_detail",
+      "group": "clinical",
+      "label": "Stage (detailed)",
+      "type": "categorical",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.781
+    },
+    {
+      "column": "stage_source",
+      "group": "clinical",
+      "label": "Stage source",
+      "type": "categorical",
+      "unit": null,
+      "source": "derived",
+      "description": null,
+      "coverage": 0.767
+    },
+    {
+      "column": "histology",
+      "group": "clinical",
+      "label": "Histological type",
+      "type": "categorical",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.938
+    },
+    {
+      "column": "grade",
+      "group": "clinical",
+      "label": "Histological grade",
+      "type": "categorical",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.416
+    },
+    {
+      "column": "dx_year",
+      "group": "clinical",
+      "label": "Year of diagnosis",
+      "type": "numeric",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.988
+    },
+    {
+      "column": "menopause",
+      "group": "clinical",
+      "label": "Menopause status",
+      "type": "categorical",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.163
+    },
+    {
+      "column": "tumor_status",
+      "group": "clinical",
+      "label": "Tumor status at last contact",
+      "type": "categorical",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.916
+    },
+    {
+      "column": "residual_tumor",
+      "group": "clinical",
+      "label": "Residual tumor",
+      "type": "categorical",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.107
+    },
+    {
+      "column": "neoadjuvant_tx",
+      "group": "therapy",
+      "label": "Neoadjuvant treatment history",
+      "type": "categorical",
+      "unit": null,
+      "source": "cBioPortal PanCancer Atlas 2018",
+      "description": null,
+      "coverage": 0.912
+    },
+    {
+      "column": "tx_any_drug",
+      "group": "therapy",
+      "label": "Any systemic therapy recorded",
+      "type": "categorical",
+      "unit": null,
+      "source": "GDC BCR Biotab drug tables",
+      "description": "'no record' means nothing was recorded, not confirmed untreated.",
+      "coverage": 0.982
+    },
+    {
+      "column": "tx_chemo",
+      "group": "therapy",
+      "label": "Chemotherapy",
+      "type": "categorical",
+      "unit": null,
+      "source": "GDC BCR Biotab drug tables",
+      "description": null,
+      "coverage": 0.982
+    },
+    {
+      "column": "tx_hormone",
+      "group": "therapy",
+      "label": "Hormone therapy",
+      "type": "categorical",
+      "unit": null,
+      "source": "GDC BCR Biotab drug tables",
+      "description": null,
+      "coverage": 0.982
+    },
+    {
+      "column": "tx_targeted",
+      "group": "therapy",
+      "label": "Targeted therapy",
+      "type": "categorical",
+      "unit": null,
+      "source": "GDC BCR Biotab drug tables",
+      "description": null,
+      "coverage": 0.982
+    },
+    {
+      "column": "tx_immunotherapy",
+      "group": "therapy",
+      "label": "Immunotherapy / vaccine",
+      "type": "categorical",
+      "unit": null,
+      "source": "GDC BCR Biotab drug tables",
+      "description": null,
+      "coverage": 0.982
+    },
+    {
+      "column": "tx_radiation",
+      "group": "therapy",
+      "label": "Radiation therapy",
+      "type": "categorical",
+      "unit": null,
+      "source": "GDC BCR Biotab radiation tables",
+      "description": null,
+      "coverage": 0.982
+    },
+    {
+      "column": "OS",
+      "group": "survival",
+      "label": "Overall survival event",
+      "type": "survival_event",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.999
+    },
+    {
+      "column": "OS_time",
+      "group": "survival",
+      "label": "Overall survival time",
+      "type": "survival_time",
+      "unit": "days",
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.994
+    },
+    {
+      "column": "DSS",
+      "group": "survival",
+      "label": "Disease-specific survival event",
+      "type": "survival_event",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.954
+    },
+    {
+      "column": "DSS_time",
+      "group": "survival",
+      "label": "Disease-specific survival time",
+      "type": "survival_time",
+      "unit": "days",
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.977
+    },
+    {
+      "column": "DFI",
+      "group": "survival",
+      "label": "Disease-free interval event",
+      "type": "survival_event",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.496
+    },
+    {
+      "column": "DFI_time",
+      "group": "survival",
+      "label": "Disease-free interval time",
+      "type": "survival_time",
+      "unit": "days",
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.495
+    },
+    {
+      "column": "PFI",
+      "group": "survival",
+      "label": "Progression-free interval event",
+      "type": "survival_event",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.981
+    },
+    {
+      "column": "PFI_time",
+      "group": "survival",
+      "label": "Progression-free interval time",
+      "type": "survival_time",
+      "unit": "days",
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 0.977
+    },
+    {
+      "column": "tmb",
+      "group": "mutation",
+      "label": "TMB (nonsynonymous)",
+      "type": "numeric",
+      "unit": "mut/Mb",
+      "source": "cBioPortal PanCancer Atlas 2018",
+      "description": "cBioPortal TMB from MC3 calls. Primary TMB column; about 1.3x the PanCanAtlas mutation-load values (smaller exome denominator).",
+      "coverage": 0.928
+    },
+    {
+      "column": "tmb_mc3",
+      "group": "mutation",
+      "label": "TMB (PanCanAtlas mutation load)",
+      "type": "numeric",
+      "unit": "mut/Mb",
+      "source": "MC3 (Ellrott et al. 2018)",
+      "description": "Non-silent mutations per Mb from the PanCanAtlas mutation-load file. Lower coverage (e.g. CESC 53%).",
+      "coverage": 0.895
+    },
+    {
+      "column": "tmb_mc3_silent",
+      "group": "mutation",
+      "label": "Silent mutation rate",
+      "type": "numeric",
+      "unit": "mut/Mb",
+      "source": "MC3 (Ellrott et al. 2018)",
+      "description": null,
+      "coverage": 0.895
+    },
+    {
+      "column": "tmb_class",
+      "group": "mutation",
+      "label": "TMB class",
+      "type": "categorical",
+      "unit": null,
+      "source": "derived",
+      "description": "TMB-H at >=10 mut/Mb (FDA pembrolizumab threshold), applied to the cBioPortal TMB column.",
+      "coverage": 0.928
+    },
+    {
+      "column": "msi_mantis",
+      "group": "mutation",
+      "label": "MSI score (MANTIS)",
+      "type": "numeric",
+      "unit": null,
+      "source": "Bonneville et al. 2017 via cBioPortal",
+      "description": null,
+      "coverage": 0.864
+    },
+    {
+      "column": "msi_sensor",
+      "group": "mutation",
+      "label": "MSI score (MSIsensor)",
+      "type": "numeric",
+      "unit": null,
+      "source": "Bonneville et al. 2017 via cBioPortal",
+      "description": null,
+      "coverage": 0.894
+    },
+    {
+      "column": "msi_status",
+      "group": "mutation",
+      "label": "MSI status",
+      "type": "categorical",
+      "unit": null,
+      "source": "derived",
+      "description": "MSI-H when MANTIS score >= 0.4. Not available for metastatic samples (most SKCM).",
+      "coverage": 0.864
+    },
+    {
+      "column": "hrd_score",
+      "group": "dna_repair",
+      "label": "HRD score",
+      "type": "numeric",
+      "unit": null,
+      "source": "Knijnenburg et al. 2018, Cell Rep",
+      "description": "Sum of HRD-LOH, TAI and LST.",
+      "coverage": 0.946
+    },
+    {
+      "column": "hrd_loh",
+      "group": "dna_repair",
+      "label": "HRD-LOH",
+      "type": "numeric",
+      "unit": null,
+      "source": "Knijnenburg et al. 2018, Cell Rep",
+      "description": null,
+      "coverage": 0.946
+    },
+    {
+      "column": "hrd_tai",
+      "group": "dna_repair",
+      "label": "Telomeric allelic imbalance",
+      "type": "numeric",
+      "unit": null,
+      "source": "Knijnenburg et al. 2018, Cell Rep",
+      "description": null,
+      "coverage": 0.946
+    },
+    {
+      "column": "hrd_lst",
+      "group": "dna_repair",
+      "label": "Large-scale state transitions",
+      "type": "numeric",
+      "unit": null,
+      "source": "Knijnenburg et al. 2018, Cell Rep",
+      "description": null,
+      "coverage": 0.946
+    },
+    {
+      "column": "hrd_class",
+      "group": "dna_repair",
+      "label": "HRD class",
+      "type": "categorical",
+      "unit": null,
+      "source": "derived",
+      "description": "HRD-H at score >= 42 (Telli et al. 2016).",
+      "coverage": 0.946
+    },
+    {
+      "column": "aneuploidy_score",
+      "group": "chromosomal_instability",
+      "label": "Aneuploidy score",
+      "type": "numeric",
+      "unit": "arms",
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": null,
+      "coverage": 0.935
+    },
+    {
+      "column": "fga",
+      "group": "chromosomal_instability",
+      "label": "Fraction genome altered",
+      "type": "numeric",
+      "unit": null,
+      "source": "cBioPortal PanCancer Atlas 2018",
+      "description": null,
+      "coverage": 0.96
+    },
+    {
+      "column": "cna_frac_altered",
+      "group": "chromosomal_instability",
+      "label": "CNA fraction altered (segments)",
+      "type": "numeric",
+      "unit": null,
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": null,
+      "coverage": 0.957
+    },
+    {
+      "column": "cna_n_segments",
+      "group": "chromosomal_instability",
+      "label": "CNA segment count",
+      "type": "numeric",
+      "unit": null,
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": null,
+      "coverage": 0.957
+    },
+    {
+      "column": "tumor_break_load",
+      "group": "chromosomal_instability",
+      "label": "Tumor break load",
+      "type": "numeric",
+      "unit": null,
+      "source": "cBioPortal PanCancer Atlas 2018",
+      "description": null,
+      "coverage": 0.937
+    },
+    {
+      "column": "ploidy",
+      "group": "chromosomal_instability",
+      "label": "Ploidy (ABSOLUTE)",
+      "type": "numeric",
+      "unit": null,
+      "source": "ABSOLUTE (PanCanAtlas)",
+      "description": null,
+      "coverage": 0.875
+    },
+    {
+      "column": "genome_doublings",
+      "group": "chromosomal_instability",
+      "label": "Genome doublings",
+      "type": "numeric",
+      "unit": null,
+      "source": "ABSOLUTE (PanCanAtlas)",
+      "description": null,
+      "coverage": 0.875
+    },
+    {
+      "column": "wgd",
+      "group": "chromosomal_instability",
+      "label": "Whole-genome doubling",
+      "type": "categorical",
+      "unit": null,
+      "source": "derived",
+      "description": null,
+      "coverage": 0.875
+    },
+    {
+      "column": "subclonal_genome_frac",
+      "group": "chromosomal_instability",
+      "label": "Subclonal genome fraction",
+      "type": "numeric",
+      "unit": null,
+      "source": "ABSOLUTE (PanCanAtlas)",
+      "description": null,
+      "coverage": 0.875
+    },
+    {
+      "column": "purity",
+      "group": "tumor",
+      "label": "Tumor purity (ABSOLUTE)",
+      "type": "numeric",
+      "unit": null,
+      "source": "ABSOLUTE (PanCanAtlas)",
+      "description": null,
+      "coverage": 0.875
+    },
+    {
+      "column": "hypoxia_buffa",
+      "group": "tumor",
+      "label": "Hypoxia score (Buffa)",
+      "type": "numeric",
+      "unit": null,
+      "source": "cBioPortal PanCancer Atlas 2018",
+      "description": null,
+      "coverage": 0.679
+    },
+    {
+      "column": "hypoxia_ragnum",
+      "group": "tumor",
+      "label": "Hypoxia score (Ragnum)",
+      "type": "numeric",
+      "unit": null,
+      "source": "cBioPortal PanCancer Atlas 2018",
+      "description": null,
+      "coverage": 0.679
+    },
+    {
+      "column": "hypoxia_winter",
+      "group": "tumor",
+      "label": "Hypoxia score (Winter)",
+      "type": "numeric",
+      "unit": null,
+      "source": "cBioPortal PanCancer Atlas 2018",
+      "description": null,
+      "coverage": 0.679
+    },
+    {
+      "column": "subtype_selected",
+      "group": "subtype",
+      "label": "Molecular subtype",
+      "type": "categorical",
+      "unit": null,
+      "source": "PanCanAtlas subtypes",
+      "description": null,
+      "coverage": 0.68
+    },
+    {
+      "column": "subtype_mrna",
+      "group": "subtype",
+      "label": "mRNA subtype",
+      "type": "categorical",
+      "unit": null,
+      "source": "PanCanAtlas subtypes",
+      "description": null,
+      "coverage": 0.533
+    },
+    {
+      "column": "subtype_dna_meth",
+      "group": "subtype",
+      "label": "DNA methylation subtype",
+      "type": "categorical",
+      "unit": null,
+      "source": "PanCanAtlas subtypes",
+      "description": null,
+      "coverage": 0.283
+    },
+    {
+      "column": "subtype_cna",
+      "group": "subtype",
+      "label": "CNA subtype",
+      "type": "categorical",
+      "unit": null,
+      "source": "PanCanAtlas subtypes",
+      "description": null,
+      "coverage": 0.187
+    },
+    {
+      "column": "subtype_integrative",
+      "group": "subtype",
+      "label": "Integrative subtype",
+      "type": "categorical",
+      "unit": null,
+      "source": "PanCanAtlas subtypes",
+      "description": null,
+      "coverage": 0.122
+    },
+    {
+      "column": "immune_subtype",
+      "group": "immune",
+      "label": "Immune subtype",
+      "type": "categorical",
+      "unit": null,
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": "C1 wound healing, C2 IFN-gamma dominant, C3 inflammatory, C4 lymphocyte depleted, C5 immunologically quiet, C6 TGF-beta dominant. Primary tumors only; DLBC and THYM not assigned.",
+      "coverage": 0.816
+    },
+    {
+      "column": "immune_subtype_label",
+      "group": "immune",
+      "label": "Immune subtype (name)",
+      "type": "categorical",
+      "unit": null,
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": null,
+      "coverage": 0.816
+    },
+    {
+      "column": "leukocyte_fraction",
+      "group": "immune",
+      "label": "Leukocyte fraction",
+      "type": "numeric",
+      "unit": null,
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": null,
+      "coverage": 0.941
+    },
+    {
+      "column": "tcr_shannon",
+      "group": "immune",
+      "label": "TCR diversity (Shannon)",
+      "type": "numeric",
+      "unit": null,
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": null,
+      "coverage": 0.825
+    },
+    {
+      "column": "tcr_clonotypes",
+      "group": "immune",
+      "label": "TCR clonotypes",
+      "type": "numeric",
+      "unit": null,
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": null,
+      "coverage": 0.913
+    },
+    {
+      "column": "bcr_shannon",
+      "group": "immune",
+      "label": "BCR diversity (Shannon)",
+      "type": "numeric",
+      "unit": null,
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": null,
+      "coverage": 0.497
+    },
+    {
+      "column": "bcr_clonotypes",
+      "group": "immune",
+      "label": "BCR clonotypes",
+      "type": "numeric",
+      "unit": null,
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": null,
+      "coverage": 0.497
+    },
+    {
+      "column": "viral_hpv",
+      "group": "viral",
+      "label": "HPV reads",
+      "type": "numeric",
+      "unit": "RPM",
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": null,
+      "coverage": 0.915
+    },
+    {
+      "column": "viral_hbv",
+      "group": "viral",
+      "label": "HBV reads",
+      "type": "numeric",
+      "unit": "RPM",
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": null,
+      "coverage": 0.915
+    },
+    {
+      "column": "viral_hcv",
+      "group": "viral",
+      "label": "HCV reads",
+      "type": "numeric",
+      "unit": "RPM",
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": null,
+      "coverage": 0.915
+    },
+    {
+      "column": "viral_ebv",
+      "group": "viral",
+      "label": "EBV reads",
+      "type": "numeric",
+      "unit": "RPM",
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": null,
+      "coverage": 0.915
+    },
+    {
+      "column": "viral_mcv",
+      "group": "viral",
+      "label": "MCPyV reads",
+      "type": "numeric",
+      "unit": "RPM",
+      "source": "Thorsson et al. 2018, Immunity",
+      "description": null,
+      "coverage": 0.915
+    },
+    {
+      "column": "qc_do_not_use",
+      "group": "qc",
+      "label": "AWG 'do not use' flag",
+      "type": "boolean",
+      "unit": null,
+      "source": "PanCanAtlas sample QC",
+      "description": null,
+      "coverage": 1
+    },
+    {
+      "column": "qc_pathology_excluded",
+      "group": "qc",
+      "label": "Excluded on pathology review",
+      "type": "boolean",
+      "unit": null,
+      "source": "PanCanAtlas sample QC",
+      "description": null,
+      "coverage": 1
+    },
+    {
+      "column": "redacted",
+      "group": "qc",
+      "label": "Redacted case",
+      "type": "boolean",
+      "unit": null,
+      "source": "TCGA-CDR (Liu et al. 2018, Cell)",
+      "description": null,
+      "coverage": 1
+    },
+    {
+      "column": "cbio_sample_type",
+      "group": "qc",
+      "label": "Canonical sample type",
+      "type": "categorical",
+      "unit": null,
+      "source": "cBioPortal PanCancer Atlas 2018",
+      "description": null,
+      "coverage": 0.974
+    },
+    {
+      "column": "arm_1p",
+      "group": "arm_level_cna",
+      "label": "Arm 1p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.773
+    },
+    {
+      "column": "arm_1q",
+      "group": "arm_level_cna",
+      "label": "Arm 1q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.832
+    },
+    {
+      "column": "arm_2p",
+      "group": "arm_level_cna",
+      "label": "Arm 2p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.85
+    },
+    {
+      "column": "arm_2q",
+      "group": "arm_level_cna",
+      "label": "Arm 2q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.802
+    },
+    {
+      "column": "arm_3p",
+      "group": "arm_level_cna",
+      "label": "Arm 3p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.816
+    },
+    {
+      "column": "arm_3q",
+      "group": "arm_level_cna",
+      "label": "Arm 3q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.807
+    },
+    {
+      "column": "arm_4p",
+      "group": "arm_level_cna",
+      "label": "Arm 4p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.869
+    },
+    {
+      "column": "arm_4q",
+      "group": "arm_level_cna",
+      "label": "Arm 4q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.823
+    },
+    {
+      "column": "arm_5p",
+      "group": "arm_level_cna",
+      "label": "Arm 5p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.867
+    },
+    {
+      "column": "arm_5q",
+      "group": "arm_level_cna",
+      "label": "Arm 5q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.809
+    },
+    {
+      "column": "arm_6p",
+      "group": "arm_level_cna",
+      "label": "Arm 6p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.816
+    },
+    {
+      "column": "arm_6q",
+      "group": "arm_level_cna",
+      "label": "Arm 6q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.811
+    },
+    {
+      "column": "arm_7p",
+      "group": "arm_level_cna",
+      "label": "Arm 7p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.865
+    },
+    {
+      "column": "arm_7q",
+      "group": "arm_level_cna",
+      "label": "Arm 7q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.815
+    },
+    {
+      "column": "arm_8p",
+      "group": "arm_level_cna",
+      "label": "Arm 8p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.844
+    },
+    {
+      "column": "arm_8q",
+      "group": "arm_level_cna",
+      "label": "Arm 8q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.809
+    },
+    {
+      "column": "arm_9p",
+      "group": "arm_level_cna",
+      "label": "Arm 9p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.819
+    },
+    {
+      "column": "arm_9q",
+      "group": "arm_level_cna",
+      "label": "Arm 9q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.857
+    },
+    {
+      "column": "arm_10p",
+      "group": "arm_level_cna",
+      "label": "Arm 10p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.862
+    },
+    {
+      "column": "arm_10q",
+      "group": "arm_level_cna",
+      "label": "Arm 10q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.815
+    },
+    {
+      "column": "arm_11p",
+      "group": "arm_level_cna",
+      "label": "Arm 11p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.839
+    },
+    {
+      "column": "arm_11q",
+      "group": "arm_level_cna",
+      "label": "Arm 11q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.791
+    },
+    {
+      "column": "arm_12p",
+      "group": "arm_level_cna",
+      "label": "Arm 12p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.847
+    },
+    {
+      "column": "arm_12q",
+      "group": "arm_level_cna",
+      "label": "Arm 12q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.826
+    },
+    {
+      "column": "arm_13",
+      "group": "arm_level_cna",
+      "label": "Arm 13",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.79
+    },
+    {
+      "column": "arm_14",
+      "group": "arm_level_cna",
+      "label": "Arm 14",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.815
+    },
+    {
+      "column": "arm_15",
+      "group": "arm_level_cna",
+      "label": "Arm 15",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.81
+    },
+    {
+      "column": "arm_16p",
+      "group": "arm_level_cna",
+      "label": "Arm 16p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.86
+    },
+    {
+      "column": "arm_16q",
+      "group": "arm_level_cna",
+      "label": "Arm 16q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.839
+    },
+    {
+      "column": "arm_17p",
+      "group": "arm_level_cna",
+      "label": "Arm 17p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.864
+    },
+    {
+      "column": "arm_17q",
+      "group": "arm_level_cna",
+      "label": "Arm 17q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.778
+    },
+    {
+      "column": "arm_18p",
+      "group": "arm_level_cna",
+      "label": "Arm 18p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.884
+    },
+    {
+      "column": "arm_18q",
+      "group": "arm_level_cna",
+      "label": "Arm 18q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.841
+    },
+    {
+      "column": "arm_19p",
+      "group": "arm_level_cna",
+      "label": "Arm 19p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.804
+    },
+    {
+      "column": "arm_19q",
+      "group": "arm_level_cna",
+      "label": "Arm 19q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.801
+    },
+    {
+      "column": "arm_20p",
+      "group": "arm_level_cna",
+      "label": "Arm 20p",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.864
+    },
+    {
+      "column": "arm_20q",
+      "group": "arm_level_cna",
+      "label": "Arm 20q",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.863
+    },
+    {
+      "column": "arm_21",
+      "group": "arm_level_cna",
+      "label": "Arm 21",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.859
+    },
+    {
+      "column": "arm_22",
+      "group": "arm_level_cna",
+      "label": "Arm 22",
+      "type": "categorical",
+      "unit": null,
+      "source": "Taylor et al. 2018, Cancer Cell",
+      "description": "-1 loss, 0 neutral, 1 gain.",
+      "coverage": 0.837
+    }
+  ]
+}

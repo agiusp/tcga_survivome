@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tcga_survivome — TCGA cohort and survival explorer</title>
+<meta name="description" content="Build patient cohorts from TCGA pan-cancer clinical and genomic-summary data and compare survival, in your browser.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>tcga_survivome</h1>
+    <p class="sub">Build a cohort from 11,160 TCGA patients across 33 cancer types, then compare survival.</p>
+  </div>
+  <div class="top-actions">
+    <button id="btn-link" type="button">Copy link to this view</button>
+    <button id="btn-csv" type="button">Download cohort (CSV)</button>
+  </div>
+</header>
+
+<div id="loading" class="loading">Loading data…</div>
+
+<div id="app" class="layout" hidden>
+  <aside class="panel filters" aria-label="Cohort filters">
+    <h2>Cohort</h2>
+    <p class="cohort-n"><strong id="cohort-n">–</strong> <span id="cohort-n-sub"></span></p>
+    <label class="check"><input type="checkbox" id="exclude-qc"> Exclude cases flagged by TCGA quality review</label>
+    <div id="filter-list"></div>
+    <select id="add-filter" aria-label="Add a filter"></select>
+    <button id="clear-filters" type="button" class="linklike">Clear all filters</button>
+  </aside>
+
+  <main>
+    <section class="panel">
+      <div class="controls">
+        <label>Endpoint
+          <select id="endpoint">
+            <option value="OS">Overall survival</option>
+            <option value="DSS">Disease-specific survival</option>
+            <option value="PFI">Progression-free interval</option>
+            <option value="DFI">Disease-free interval</option>
+          </select>
+        </label>
+        <label>Compare by
+          <select id="group-by"></select>
+        </label>
+        <label id="split-wrap" hidden>Split at
+          <select id="split">
+            <option value="median">Median</option>
+            <option value="tertile">Tertiles</option>
+            <option value="quartile">Quartiles</option>
+            <option value="extremes">Top vs. bottom quartile</option>
+            <option value="custom">Custom cut point</option>
+          </select>
+        </label>
+        <label id="cutoff-wrap" hidden>Cut point
+          <input id="cutoff" type="number" step="any" inputmode="decimal">
+        </label>
+        <label>Time in
+          <select id="unit"><option value="months">Months</option><option value="years">Years</option></select>
+        </label>
+        <label>Censor follow-up at
+          <input id="censor-at" type="number" min="0" step="any" placeholder="no limit" inputmode="decimal">
+        </label>
+      </div>
+      <div class="controls toggles">
+        <label class="check" id="within-wrap" hidden><input type="checkbox" id="within-type"> Compute cut points within each cancer type</label>
+        <label class="check"><input type="checkbox" id="stratify"> Stratify tests by cancer type</label>
+        <label class="check"><input type="checkbox" id="show-ci"> Confidence bands</label>
+        <label class="check"><input type="checkbox" id="show-censor"> Censoring marks</label>
+      </div>
+      <div id="notes" class="notes"></div>
+
+      <h2 id="km-title">Survival</h2>
+      <p id="km-test" class="test"></p>
+      <div id="km-legend" class="legend"></div>
+      <div id="km-wrap" class="chart-wrap">
+        <div id="km-plot"></div>
+        <div id="km-tip" class="tip" hidden></div>
+      </div>
+      <button id="btn-svg" type="button" class="linklike">Download plot (SVG)</button>
+      <div class="table-scroll"><table id="km-table" class="data"></table></div>
+    </section>
+
+    <section class="panel">
+      <h2>Cox proportional hazards model</h2>
+      <p class="hint">Hazard ratios adjusted for the variables you add. Patients missing any of them are left out.</p>
+      <div class="controls">
+        <label class="check"><input type="checkbox" id="cox-groups"> Include the comparison groups</label>
+        <select id="add-cov" aria-label="Add a covariate"></select>
+      </div>
+      <div id="cov-list" class="chips"></div>
+      <div id="cox-out"></div>
+    </section>
+
+    <section class="panel about">
+      <h2>About the data</h2>
+      <ul>
+        <li>One row per patient, harmonized from the TCGA Clinical Data Resource (Liu et al., <i>Cell</i> 2018), PanCanAtlas supplementary files and cBioPortal. All open access.</li>
+        <li>Therapy fields are sparse: “no record” means nothing was recorded, not that the patient was untreated. Comparing survival by treatment received after diagnosis is also prone to immortal-time bias.</li>
+        <li>Follow-up is short for many cancer types. TCGA-CDR recommends the progression-free interval over overall survival for most of them.</li>
+        <li>Results are exploratory and unadjusted for multiple testing. This is a research tool and not for clinical use.</li>
+      </ul>
+      <p class="hint">Kaplan–Meier, log-rank and Cox estimates are computed in your browser and are tested against R’s <code>survival</code> package.</p>
+    </section>
+  </main>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

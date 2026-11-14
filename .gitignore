@@ -1,0 +1,6 @@
+data/raw/
+.Rhistory
+.RData
+.DS_Store
+node_modules/
+MANIFEST.txt
