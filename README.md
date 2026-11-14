@@ -32,7 +32,8 @@ needs a network connection.
 
 ## Tests
 
-The statistics are checked against R's `survival` package (`survfit`, `survdiff`, `coxph`):
+The statistics are checked against R's `survival` package (`survfit`, `survdiff`, `coxph`);
+how each one is computed is described in [docs/methods.md](docs/methods.md).
 
 ```sh
 Rscript tests/make_fixtures.R      # only when the data or the reference cases change
